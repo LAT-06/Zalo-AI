@@ -1,0 +1,147 @@
+# Configuration File for AeroEyes Challenge
+# Modify these parameters to customize the pipeline
+
+# =============================================================================
+# PATHS
+# =============================================================================
+train_dir: train
+test_dir: public_test
+output_dir: output
+
+# =============================================================================
+# DATASET
+# =============================================================================
+dataset:
+  val_split: 0.2              # Validation split ratio (0.2 = 20%)
+  frame_sampling: 50          # Extract frame every N frames (50 = every 2 seconds at 25fps)
+  
+# =============================================================================
+# TRAINING
+# =============================================================================
+training:
+  # Model configuration
+  model_size: n               # n (nano), s (small), m (medium), l (large), x (xlarge)
+  img_size: 640               # Input image size (640 or 512)
+  
+  # Training parameters
+  epochs: 100                 # Number of training epochs
+  batch_size: 16              # Batch size (reduce if GPU OOM)
+  patience: 20                # Early stopping patience
+  
+  # Optimizer
+  optimizer: SGD
+  lr0: 0.01                   # Initial learning rate
+  momentum: 0.937
+  weight_decay: 0.0005
+  warmup_epochs: 3
+  
+  # Learning rate schedule
+  cos_lr: true                # Use cosine learning rate scheduler
+  lrf: 0.01                   # Final learning rate factor
+  
+  # Mixed precision
+  amp: true                   # Automatic Mixed Precision (FP16)
+  
+  # Device
+  device: '0'                 # CUDA device ('0', '0,1', or 'cpu')
+  workers: 8                  # Number of dataloader workers
+  
+  # Caching
+  cache: false                # Cache images (requires RAM, faster training)
+
+# =============================================================================
+# AUGMENTATION
+# =============================================================================
+augmentation:
+  # Mosaic and MixUp
+  mosaic: 1.0                 # Mosaic augmentation probability
+  mixup: 0.2                  # MixUp augmentation probability
+  copy_paste: 0.0             # Copy-paste augmentation probability
+  
+  # Geometric transforms
+  degrees: 10.0               # Rotation degrees
+  translate: 0.1              # Translation
+  scale: 0.5                  # Scale range
+  shear: 0.0                  # Shear
+  perspective: 0.0            # Perspective
+  
+  # Flip
+  flipud: 0.0                 # Vertical flip (disabled for aerial)
+  fliplr: 0.5                 # Horizontal flip
+  
+  # Color augmentation
+  hsv_h: 0.015                # HSV hue augmentation
+  hsv_s: 0.7                  # HSV saturation augmentation
+  hsv_v: 0.4                  # HSV value augmentation
+  
+  # Other
+  close_mosaic: 10            # Disable mosaic in last N epochs
+
+# =============================================================================
+# INFERENCE
+# =============================================================================
+inference:
+  # Detection parameters
+  conf_thresh: 0.25           # Confidence threshold
+  iou_thresh: 0.45            # NMS IoU threshold
+  
+  # Tracking parameters
+  track_thresh: 0.4           # Tracking confidence threshold
+  track_buffer: 30            # Frame buffer for lost tracks
+  match_thresh: 0.8           # IoU threshold for track matching
+  smooth_window: 5            # Temporal smoothing window size
+  
+  # Visualization
+  visualize: false            # Generate visualization videos
+  save_txt: false             # Save detection results as txt
+
+# =============================================================================
+# TENSORRT OPTIMIZATION (Jetson Deployment)
+# =============================================================================
+tensorrt:
+  enabled: false              # Enable TensorRT optimization
+  fp16: true                  # Use FP16 precision
+  batch_size: 1               # Batch size for TensorRT
+  workspace: 4                # Workspace size in GB
+  
+  # Benchmarking
+  benchmark: true             # Run benchmark after optimization
+  iterations: 100             # Number of benchmark iterations
+
+# =============================================================================
+# EVALUATION
+# =============================================================================
+evaluation:
+  iou_threshold: 0.5          # IoU threshold for ST-IoU metric
+  
+# =============================================================================
+# SUBMISSION
+# =============================================================================
+submission:
+  add_timestamp: true         # Add timestamp to submission filename
+  validate_format: true       # Validate submission format
+  run_sanity_check: true      # Run sanity check on validation set
+
+# =============================================================================
+# LOGGING
+# =============================================================================
+logging:
+  verbose: true               # Verbose output
+  plots: true                 # Generate plots
+  save_period: -1             # Save checkpoint every N epochs (-1 = disabled)
+
+# =============================================================================
+# ADVANCED
+# =============================================================================
+advanced:
+  # Loss weights
+  box_loss_weight: 7.5        # Box loss weight
+  cls_loss_weight: 0.5        # Classification loss weight
+  dfl_loss_weight: 1.5        # Distribution focal loss weight
+  
+  # Multi-scale training
+  multi_scale: false          # Train with multiple scales
+  
+  # Resume training
+  resume: false               # Resume from last checkpoint
+  resume_path: null           # Path to checkpoint (null = auto-detect)
