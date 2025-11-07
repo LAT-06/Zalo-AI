@@ -1,0 +1,13 @@
+{
+  "video": "public_test/samples/BlackBox_1/drone_video.mp4",
+  "model": "runs/train/aeroeyes/weights/best.pt",
+  "total_frames": 5776,
+  "fps": 25.0,
+  "duration": 231.04,
+  "inference_time": 39.605121,
+  "fps_inference": 145.83972613036582,
+  "total_detections": 47,
+  "frames_with_detections": 47,
+  "output_dir": "test_output/BlackBox_1",
+  "timestamp": "2025-11-07T11:12:05.505160"
+}

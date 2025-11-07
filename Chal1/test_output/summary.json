@@ -1,0 +1,58 @@
+{
+  "timestamp": "2025-11-07T11:37:34.926122",
+  "model": "runs/train/aeroeyes/weights/best.pt",
+  "total_videos": 6,
+  "total_detections": 4858,
+  "total_inference_time": 238.80984,
+  "average_fps": 148.9678984752052,
+  "videos": [
+    {
+      "video": "BlackBox_0",
+      "total_frames": 5443,
+      "duration": 217.72,
+      "detections": 333,
+      "inference_time": 33.682266,
+      "fps_inference": 161.59839127213115
+    },
+    {
+      "video": "BlackBox_1",
+      "total_frames": 5776,
+      "duration": 231.04,
+      "detections": 47,
+      "inference_time": 36.275445,
+      "fps_inference": 159.2261652475938
+    },
+    {
+      "video": "CardboardBox_0",
+      "total_frames": 5285,
+      "duration": 211.4,
+      "detections": 84,
+      "inference_time": 35.24509,
+      "fps_inference": 149.9499646617444
+    },
+    {
+      "video": "CardboardBox_1",
+      "total_frames": 5942,
+      "duration": 237.68,
+      "detections": 14,
+      "inference_time": 36.767028,
+      "fps_inference": 161.61219231535384
+    },
+    {
+      "video": "LifeJacket_0",
+      "total_frames": 8309,
+      "duration": 332.36,
+      "detections": 2576,
+      "inference_time": 63.109945,
+      "fps_inference": 131.65912282129227
+    },
+    {
+      "video": "LifeJacket_1",
+      "total_frames": 4820,
+      "duration": 192.8,
+      "detections": 1804,
+      "inference_time": 33.730066,
+      "fps_inference": 142.8992163845751
+    }
+  ]
+}
